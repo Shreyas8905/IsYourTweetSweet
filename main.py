@@ -15,10 +15,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
+origins = [
+    "http://is-your-tweet-sweet-3goi.vercel.app",  # frontend deployed on Vercel
+    "https://is-your-tweet-sweet-3goi.vercel.app", # in case HTTPS gets auto-forced later
+    "http://localhost:5173",  # local Vite dev
+    "http://127.0.0.1:5173",  # alternative local
+]
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # Allow all origins (use specific domains in production)
+    allow_origins=origins,          # Allow all origins (use specific domains in production)
     allow_credentials=True,
     allow_methods=["*"],          # Allow all HTTP methods
     allow_headers=["*"],          # Allow all headers
